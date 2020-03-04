@@ -6,7 +6,7 @@ const jstat = require('jstat');
 const math = require('mathjs');
 const buildChart = require('./buildChart');
 
-const data = fs.readFileSync('src/dataset.csv', { encoding : 'utf8'});
+const data = fs.readFileSync('src/data/input.csv', { encoding : 'utf8'});
 
 var options = {
     quote     : '"',
@@ -63,10 +63,17 @@ const normByCovariance = (items, columns) => {
 normedItemsByMinMax = normByMinMax(items, columns);
 normedItemsByCovariance = normByCovariance(items, columns);
 
-// const chartData = columns.map(column => minMaxData[column].max);
-// console.log(chartData);
+// const chartData = {};
+// columns.forEach(column => {
+//     chartData[column] = normData[column].max;
+// });
+const chartData = {
+    Revenue: items.map(item => item["Revenue"]),
+    Profit: items.map(item => item["Profit"])
+};
+console.log(chartData);
 
-// buildChart.histogramChart(chartData);
+buildChart.histogramChart(chartData);
 
 // ------------------
 // Correlation table
@@ -86,7 +93,7 @@ const buildCorrelationTable = (fileName, array, columns) => {
         correlationArray.push(columnArray);
     });
     const tableCSV = csvjson.toCSV(correlationArray, { ...options, headers: 'key' });
-    fs.writeFileSync(`src/${fileName}.csv`, tableCSV, { encoding : 'utf8'});
+    fs.writeFileSync(`src/data/${fileName}.csv`, tableCSV, { encoding : 'utf8'});
 };
 
 buildCorrelationTable("min_max_corr", normedItemsByMinMax, columns);
@@ -96,8 +103,8 @@ buildCorrelationTable("not_normed_corr", items, columns);
 
 
 const itemsCSV = csvjson.toCSV(items, { ...options, headers: 'key' });
-fs.writeFileSync('src/output.csv', itemsCSV, { encoding : 'utf8'});
+fs.writeFileSync('src/data/output.csv', itemsCSV, { encoding : 'utf8'});
 const normedItemsByMinMaxCSV = csvjson.toCSV(normedItemsByMinMax, { ...options, headers: 'key' });
-fs.writeFileSync('src/normed_by_min_max.csv', normedItemsByMinMaxCSV, { encoding : 'utf8'});
+fs.writeFileSync('src/data/normed_by_min_max.csv', normedItemsByMinMaxCSV, { encoding : 'utf8'});
 const normedItemsByCovarianceCSV = csvjson.toCSV(normedItemsByCovariance, { ...options, headers: 'key' });
-fs.writeFileSync('src/normed_by_covariance.csv', normedItemsByCovarianceCSV, { encoding : 'utf8'});
+fs.writeFileSync('src/data/normed_by_covariance.csv', normedItemsByCovarianceCSV, { encoding : 'utf8'});

@@ -57,7 +57,7 @@ const removeOutliers = (items) => {
     innerOutliers = items.filter(item => isInnerOutlier(item, columns));
     // inner outliers
     const innerOutliersCSV = csvjson.toCSV(innerOutliers, { ...options, headers: 'key' });
-    fs.writeFileSync('src/inner_outliers.csv', innerOutliersCSV, { encoding : 'utf8'});
+    fs.writeFileSync('src/data/inner_outliers.csv', innerOutliersCSV, { encoding : 'utf8'});
     return items;
 };
 
