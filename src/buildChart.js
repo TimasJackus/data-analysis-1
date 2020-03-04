@@ -24,30 +24,9 @@ const borderWidth = 1;
 const histogramChart = (object) => {
     const template = fs.readFileSync('src/templates/bar.hbs', { encoding : 'utf8'});
     const barHTML = Handlebars.compile(template);
-    const data = object["Revenue"].map((item, index) => {
-        return {
-            x: item,
-            y: object["Profit"][index]
-        };
-    }); // Object.values(object);
-    const labels = JSON.stringify(Object.keys(object));
-    // const dataReverse = [...data].reverse();
-
-    console.log(data);
-    
-    const datasets = JSON.stringify([
-        {
-            label: '# of items',
-            data,
-            backgroundColor,
-            borderColor,
-            borderWidth
-        }
-    ]);
-
-    console.log(datasets);
-
-    fs.writeFileSync('src/charts/chart.html', barHTML({ labels, datasets, title: 'Bar chart', label: '# of Test' }), { encoding : 'utf8'});
+    const array1 = JSON.stringify(object["Revenue"]);
+    const array2 = JSON.stringify(object["Profit"]);
+    fs.writeFileSync('src/charts/chart.html', barHTML({ array1, array2 }), { encoding : 'utf8'});
 } ;
 
 exports.histogramChart = histogramChart;

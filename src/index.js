@@ -63,28 +63,14 @@ const normByCovariance = (items, columns) => {
 normedItemsByMinMax = normByMinMax(items, columns);
 normedItemsByCovariance = normByCovariance(items, columns);
 
-// const chartData = {};
-// columns.forEach(column => {
-//     chartData[column] = normData[column].max;
-// });
-const chartData = {
-    Revenue: items.map(item => item["Revenue"]),
-    Profit: items.map(item => item["Profit"])
-};
-console.log(chartData);
 
-buildChart.histogramChart(chartData);
 
 // ------------------
 // Correlation table
-const capitalize = (lower) => {
-    return lower.charAt(0).toUpperCase() + lower.substring(1);
-}
-
 const buildCorrelationTable = (fileName, array, columns) => {
     const correlationArray = []
     columns.forEach(column => {
-        const columnArray = { Column: capitalize(column) };
+        const columnArray = { Column: column };
         const columnValues = array.map(item => item[column]);
         columns.forEach(secondColumn => {
             const secondColumnValues = array.map(item => item[secondColumn]);
@@ -100,6 +86,13 @@ buildCorrelationTable("min_max_corr", normedItemsByMinMax, columns);
 buildCorrelationTable("cov_corr", normedItemsByCovariance, columns);
 buildCorrelationTable("not_normed_corr", items, columns);
 // ------------------
+
+
+const chartData = {
+    Revenue: items.map(item => item["Revenue"]),
+    Profit: items.map(item => item["Profit"])
+};
+buildChart.histogramChart(chartData);
 
 
 const itemsCSV = csvjson.toCSV(items, { ...options, headers: 'key' });

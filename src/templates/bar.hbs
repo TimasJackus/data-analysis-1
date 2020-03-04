@@ -14,28 +14,26 @@
         </style>
     </head>
     <body>
-        <canvas id="chart"></canvas>
-        <script src="./Chart.min.js"></script>
+        <div id="chart"></div>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
         <script>
-        var ctx = document.getElementById('chart').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'scatter',
-            data: {
-                labels: {{{ labels }}},
-                datasets: {{{ datasets }}}
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
-            }
-        });
+            var trace1 = {
+                y: {{{ array2 }}},
+                type: 'box',
+                name: 'Revenue',
+                boxpoints: 'suspectedoutliers',
+            };
+
+            var trace2 = {
+                y: {{{ array2 }}},
+                type: 'box',
+                name: 'Employees',
+                boxpoints: 'suspectedoutliers'
+            };
+
+            var data = [trace1, trace2];
+
+            Plotly.newPlot('chart', data);
         </script>
     </body>
 </html>
