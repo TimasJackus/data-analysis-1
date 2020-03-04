@@ -7,6 +7,7 @@ const math = require('mathjs');
 const buildChart = require('./buildChart');
 
 const data = fs.readFileSync('src/data/input.csv', { encoding : 'utf8'});
+const columns = ["Revenue", "Expenses", "Inception", "Profit", "Employees", "Growth"];
 
 var options = {
     quote     : '"',
@@ -15,7 +16,39 @@ var options = {
 
 let items = csvjson.toObject(data, options);
 items = fillMissingData(items);
-items = removeOutliers(items);
+const summary = {};
+columns.forEach(column => {
+    const array = items.map(item => item[column]);
+    summary[column] = {
+        min: Math.min(...array),
+        max: Math.max(...array),
+        q1: Number(math.quantileSeq(array, 0.25)),
+        q3: Number(math.quantileSeq(array, 0.75)),
+        mean: math.mean(...array),
+        variance: math.variance(...array),
+        median: math.median(...array),
+        std: math.std(...array)
+    };
+});
+
+// console.log('summary before remove outliers: ', summary);
+
+items = removeOutliers(items, columns);
+
+columns.forEach(column => {
+    const array = items.map(item => item[column]);
+    summary[column] = {
+        min: Math.min(...array),
+        max: Math.max(...array),
+        q1: Number(math.quantileSeq(array, 0.25)),
+        q3: Number(math.quantileSeq(array, 0.75)),
+        mean: math.mean(...array),
+        variance: math.variance(...array),
+        median: math.median(...array),
+        std: math.std(...array)
+    };
+});
+// console.log('summary after remove outliers: ', summary);
 
 const normData = {};
 
@@ -35,7 +68,6 @@ const buildNormData = (items, columns) => {
     });
 };
 
-const columns = ["Revenue", "Expenses", "Profit", "Employees", "Growth"];
 buildNormData(items, columns);
 
 const normByMinMax = (items, columns) => {
@@ -60,8 +92,8 @@ const normByCovariance = (items, columns) => {
     });
 };
 
-normedItemsByMinMax = normByMinMax(items, columns);
-normedItemsByCovariance = normByCovariance(items, columns);
+const normedItemsByMinMax = normByMinMax(items, columns);
+const normedItemsByCovariance = normByCovariance(items, columns);
 
 
 
@@ -87,12 +119,25 @@ buildCorrelationTable("cov_corr", normedItemsByCovariance, columns);
 buildCorrelationTable("not_normed_corr", items, columns);
 // ------------------
 
+const buildDiagramByIndustryRevenue = (items) => {
+    let industries = new Set();
+    items.forEach(item => industries.add(item["Industry"]));
+    industries = [...industries];
+    const industryValues = {};
+    industries.forEach(key => Object.assign(industryValues, { [key]: [] }));
 
-const chartData = {
-    Revenue: items.map(item => item["Revenue"]),
-    Profit: items.map(item => item["Profit"])
+    items.forEach(item => {
+        industryValues[item["Industry"]].push(item["Revenue"]);
+    });
+
+    const industryValuesByMedian = industries.map(industry => {
+        return math.median(...industryValues[industry]);
+    });
+
+    buildChart.histogramChart(industries, industryValuesByMedian, "industry_revenue");
 };
-buildChart.histogramChart(chartData);
+buildDiagramByIndustryRevenue(items);
+
 
 
 const itemsCSV = csvjson.toCSV(items, { ...options, headers: 'key' });

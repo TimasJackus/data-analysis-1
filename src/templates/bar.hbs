@@ -17,21 +17,13 @@
         <div id="chart"></div>
         <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
         <script>
-            var trace1 = {
-                y: {{{ array2 }}},
-                type: 'box',
-                name: 'Revenue',
-                boxpoints: 'suspectedoutliers',
-            };
-
-            var trace2 = {
-                y: {{{ array2 }}},
-                type: 'box',
-                name: 'Employees',
-                boxpoints: 'suspectedoutliers'
-            };
-
-            var data = [trace1, trace2];
+            var data = [
+                {
+                    x: {{{ array1 }}},
+                    y: {{{ array2 }}},
+                    type: 'bar'
+                }
+            ];
 
             Plotly.newPlot('chart', data);
         </script>

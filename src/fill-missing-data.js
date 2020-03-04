@@ -53,6 +53,7 @@ function fillMissingData(items) {
         } else {
             item["Employees"] = Number(item["Employees"]);
         }
+        item["Inception"] = Number(item["Inception"]);
     });
 
     return items;

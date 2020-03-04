@@ -7,7 +7,7 @@ var options = {
     delimiter: '',
 };
 
-const removeOutliers = (items) => {
+const removeOutliers = (items, columns) => {
     const outlierData = {};
 
     const buildOutlierData = (items, columns) => {
@@ -51,7 +51,6 @@ const removeOutliers = (items) => {
         }) ? true : false;
     };
 
-    const columns = ["Revenue", "Expenses", "Profit", "Employees", "Growth"];
     buildOutlierData(items, columns);
     items = items.filter(item => !isOuterOutlier(item, columns));
     innerOutliers = items.filter(item => isInnerOutlier(item, columns));
