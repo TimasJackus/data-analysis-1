@@ -7,7 +7,7 @@ const math = require('mathjs');
 const buildChart = require('./buildChart');
 
 const data = fs.readFileSync('src/data/input.csv', { encoding : 'utf8'});
-const columns = ["Revenue", "Expenses", "Inception", "Profit", "Employees", "Growth"];
+const columns = ["Revenue", "Expenses", "Profit", "Employees", "Growth"];
 
 var options = {
     quote     : '"',
@@ -119,25 +119,79 @@ buildCorrelationTable("cov_corr", normedItemsByCovariance, columns);
 buildCorrelationTable("not_normed_corr", items, columns);
 // ------------------
 
-const buildDiagramByIndustryRevenue = (items) => {
+const regression = require('regression');
+
+const buildDiagram = (items, xColumn, yColumn, type = 'bar') => {
     let industries = new Set();
-    items.forEach(item => industries.add(item["Industry"]));
+    items.forEach(item => industries.add(item[xColumn]));
     industries = [...industries];
     const industryValues = {};
     industries.forEach(key => Object.assign(industryValues, { [key]: [] }));
 
     items.forEach(item => {
-        industryValues[item["Industry"]].push(item["Revenue"]);
+        industryValues[item[xColumn]].push(item[yColumn]);
     });
 
-    const industryValuesByMedian = industries.map(industry => {
-        return math.median(...industryValues[industry]);
-    });
+    industries = industries.map(industry => {
+        return {
+            label: industry,
+            value: math.mean(...industryValues[industry])
+        }
+    }).sort((a, b) => b.value - a.value);
 
-    buildChart.histogramChart(industries, industryValuesByMedian, "industry_revenue");
+    if (type === 'scatter') {
+        const result = regression.linear(industries.map(item => [item.label, item.value]));
+        const lineX = result.points.map(point => point[0]);
+        const lineY = result.points.map(point => point[1]);
+        buildChart.chart(industries, `${xColumn}_${yColumn}`.toLowerCase(), type, { lineX, lineY });
+        return;
+    }
+    buildChart.chart(industries, `${xColumn}_${yColumn}`.toLowerCase(), type);
 };
-buildDiagramByIndustryRevenue(items);
+buildDiagram(items, "Industry", "Revenue");
+buildDiagram(items, "Industry", "Profit");
+buildDiagram(items, "Industry", "Growth");
+buildDiagram(items, "Industry", "Employees");
+buildDiagram(items, "State", "Profit");
+//
+buildDiagram(items, "Revenue", "Profit", 'scatter');
+buildDiagram(items, "Profit", "Expenses", 'scatter');
+buildDiagram(items, "Revenue", "Growth", 'scatter');
+buildDiagram(items, "Revenue", "Expenses", 'scatter');
+//
+const buildFreqDiagram = (items, column, type = 'bar') => {
+    let industries = {};
+    items.forEach(item => {
+        if (!industries[item[column]]) {
+            industries[item[column]] = 1;
+        } else {
+            industries[item[column]] += 1;
+        }
+    });
+    const array = Object.keys(industries).map(label => {
+        return {
+            label,
+            value: industries[label]
+        };
+    }).sort((a, b) => b.value - a.value);;
 
+
+    buildChart.chart(array, `${column}_frequency`.toLowerCase(), type);
+};
+buildFreqDiagram(items, "Industry");
+buildFreqDiagram(items, "State");
+
+const buildBoxDiagram = (items, column) => {
+    const array = items.map(item => item[column]);
+
+    buildChart.boxChart(array, `${column}_box`.toLowerCase(), column);
+};
+
+buildBoxDiagram(items, "Revenue");
+buildBoxDiagram(items, "Employees");
+buildBoxDiagram(items, "Expenses");
+buildBoxDiagram(items, "Profit");
+buildBoxDiagram(items, "Growth");
 
 
 const itemsCSV = csvjson.toCSV(items, { ...options, headers: 'key' });

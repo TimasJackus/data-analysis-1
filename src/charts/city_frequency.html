@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <style>
+            html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+            }
+            canvas {
+                margin: 0 auto;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="chart"></div>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <script>
+            var data = [
+                {
+                    x: ["San Diego","New York","Reston","Houston","Minneapolis","Austin","Chicago","Tampa","Seattle","Dallas","Atlanta","Boston","Columbia","Orlando","Falls Church","Sterling","Nashville","Boca Raton","Franklin","San Antonio","Rockville","Portland","Washington","Denver","Ashburn","Herndon","Durham","Los Angeles","Plano","Philadelphia","Carlsbad","Scottsdale","Huntsville","Columbus","Bethesda","Iselin","Chantilly","Bellevue","St. Louis","Woodstock","San Ramon","Chesapeake","Maitland","Silver Spring","Newport Beach","Sandy","Baltimore","South Jordan","Newark","Alpharetta","Roswell","Glen Allen","Tucson","Winter Garden","Annapolis","Stafford","Greensboro","Tysons Corner","Charlotte","Norwalk","Madison","Richmond","Indianapolis","Santa Barbara","San Francisco","Troy","Omaha","Greenbelt","Lehi","Allentown","Carrollton","Santa Clara","Northampton","Lisbon Falls","Cicero","Hopewell Junction","Princeton","Buffalo","Centennial","Lakewood","Frisco","Novi","Midlothian","Greenville","Orange","Collingswood","Hickory Hills","Fresno","O'Fallon","Providence","New Haven","Virginia Beach","Bloomington","Wichita","Star City","Woodbury","Burbank","Wilmington","Dacula","St. Petersburg","San Clemente","Horsham","Cary","Chelmsford","Waxhaw","Blacksburg","Elk Grove Village","Clearwater","Manalapan","Hamilton","San Jose","Redmond","Fort Walton Beach","Vista","Ann Arbor","Farmingdale","Aliso Viejo","La Crosse","Smyrna","West Chester","Flowood","Kittery","Jackson","North Charleston","Augusta","Chapel Hill","Vienna","Woodbine","Lee's Summit","Montgomery","Des Plaines","Golden Valley","Westchester","Warren","Clayton","Encino","Pasadena","Newtown Square","Spring Hill","Moorestown","Lake Charles","Cheektowaga","Walnut","WAYNE","Scarsdale","Rancho Dominguez","Coronado","Framingham","Willow Grove","Canton","Independence","Irmo","Hanover","Cincinnati","Minnetonka","Williamsville","Cranbury","Pembroke Pines","Worley","Apopka","Anderson","Jacksonville","Louisville","Salt Lake City","Rutherford","Sterling Heights","North Hollywood","Edina","Redwood City","El Cajon","Hilton Head Island","Boardman","Medford","Suffolk","Billerica","Lyndhurst","Centerville","Savage","Westbury","Edison","Rockland","Coventry","Summerfield","Medley","Tinley Park","Monroe","Bellwood","Memphis","Mount Pleasant","Millersville","Davenport","Burnsville","West Hollywood","Westlake","Irving","Littleton","Rochester Hills","Schaumburg","Bakersfield","Trenton","Oakbrook Terrace","Lombard","Corona","FRISCO","Hendersonville","Naples","Fairfax","San Bernardino","Norcross","Lake Oswego","Oxnard","Irvine","Hawthorne","Duluth","Chandler","Lindon","Provo","Highlands Ranch","Fort Lauderdale","Humble","Whitestone","Brooklyn","Las Vegas","Mauldin","Commerce Township","Huntington Beach","Suwanee","Fredericksburg","Phoenix","West Des Moines","Marietta","Alexandria","Deerfield Beach","Erlanger","Roseville","Sunrise","Melville","atlanta","Ontario","Niagara Falls","Kentwood","Bridgeview","Latham","Arlington","Shillington","Kennesaw","Cleveland","Jamestown","Woodside","Coeur d Alene","Sarasota","Mansfield","North Wales","South Plainfield","Cambridge","Rolling Meadows","Haltom City","Springfield","Tulsa","Davidson","Westfield","Brookfield","Clifton Park","Wauwatosa","Coralville","Moscow","Farmers Branch","Florence","Oshkosh","Plymouth Meeting","henderson","Glendale Heights","Medina","Addison"],
+                    y: [13,11,10,9,7,7,7,6,5,5,5,5,5,4,4,4,4,4,4,4,4,4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                    type: 'bar'
+                }
+            ];
+
+            Plotly.newPlot('chart', data);
+        </script>
+    </body>
+</html>

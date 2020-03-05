@@ -63,6 +63,7 @@ ID,Name,Industry,Inception,Employees,State,City,Revenue,Expenses,Profit,Growth
 67,Vivacode,Construction,2009,28,LA,Lake Charles,9410642,4117102,5293540,5
 68,Dongcom,Retail,2002,8,NY,Cheektowaga,14477085,2772159,11704926,10
 70,Jobzencane,Software,2011,40,PA,WAYNE,7482411,2379903,5102508,21
+72,Vilacan,Retail,1999,28,UT,Orem,12916975,5973654,6943321,12
 73,Stattechno,Health,2014,80,WA,Seattle,6619705,4082936,2536769,10
 74,Conin,Construction,2009,23,CA,Rancho Dominguez,9903489,6042545,3860944,8
 75,Rezumfind,IT Services,2000,50,VA,Herndon,14024010,3101952,10922058,23
@@ -145,6 +146,7 @@ ID,Name,Industry,Inception,Employees,State,City,Revenue,Expenses,Profit,Growth
 163,Zer-Plus,Software,2008,27,MA,Franklin,5848690,5240164,608526,26
 164,Hexzoomity,Health,2013,11,TX,Austin,10319636,5863890,4455746,12
 165,Vilahouse,Software,2011,12,CA,San Diego,7662253,7543897,118356,23
+166,Lamcare,Construction,1999,108,NY,Staten Island,7547716,5232913,2314803,14
 167,Keytouch,Construction,2013,400,CA,Vista,8597264,5649633,2947631,9
 168,Kincon,Software,2009,130,MI,Ann Arbor,12239282,2973757,9265525,17
 169,Tancode,IT Services,2014,7,NY,Farmingdale,15506061,5204074,10301987,26
@@ -267,6 +269,7 @@ ID,Name,Industry,Inception,Employees,State,City,Revenue,Expenses,Profit,Growth
 293,Mathassertive,IT Services,2007,102,VA,Chantilly,10804178,3549635,7254543,23
 294,Wightmuon,Retail,2013,13,TX,San Antonio,8773124,7957743,815381,12
 295,Optimismexterior,Construction,2009,28,IL,Bellwood,8427020,4316632,4110388,9
+296,Shovelerablaze,Construction,1999,150,IL,Downers Grove,6014864,3570801,2444063,7
 297,Posseratty,Retail,2014,13,TN,Memphis,11361118,1450080,9911038,11
 298,Freezehouses,IT Services,2011,175,SC,Mount Pleasant,13062368,4786821,8275547,18
 299,Damedash,Construction,2012,48,CA,San Diego,5215835,3877333,1338502,11
@@ -288,6 +291,7 @@ ID,Name,Industry,Inception,Employees,State,City,Revenue,Expenses,Profit,Growth
 317,Nomarchy,Construction,2010,24,NC,Charlotte,14102177,1485995,12616182,9
 318,Turboprop,Retail,2010,42,MI,Rochester Hills,12665972,3533350,9132622,9
 319,Parhelion,IT Services,2012,23,VA,Sterling,13157679,7451573,5706106,15
+320,Protractile,IT Services,1999,18,CO,Arvada,13398615,3834886,9563729,20
 321,Precincts,IT Services,2012,205,IL,Schaumburg,12000187,1394333,10605854,22
 322,Hookiest,IT Services,2005,40,CA,Bakersfield,9691133,5204053,4487080,23
 323,Anarchical,Health,2014,67,GA,Roswell,8818759,6385105,2433654,7

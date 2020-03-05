@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title></title>
+        <title>{{ title }}</title>
         <style>
             html, body {
                 width: 100%;
@@ -19,9 +19,17 @@
         <script>
             var data = [
                 {
-                    x: ["IT Services","Retail","Financial Services","Government Services","Construction","Health","Software"],
-                    y: [14123890.524475524,11567992.673913043,10716639.326086957,9312585.976744186,9102118.795918368,8816952.22972973,7997605.830508474],
-                    type: 'bar'
+                    x: {{{ array1 }}},
+                    y: {{{ array2 }}},
+                    mode: 'markers',
+                    type: 'scatter',
+                    marker: { size: 5 }
+                },
+                {
+                    x: {{{ lineX }}},
+                    y: {{{ lineY }}},
+                    mode: 'lines',
+                    type: 'scatter'
                 }
             ];
 
