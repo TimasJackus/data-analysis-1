@@ -6,7 +6,7 @@
     "chartjs-node-canvas": "^3.0.6",
     "csvjson": "^5.1.0",
     "handlebars": "^4.7.3",
-    "jsdom": "^16.2.0",
+    "jsdom": "^16.5.0",
     "jstat": "^1.9.2",
     "mathjs": "^6.6.1",
     "regression": "^2.0.1"
